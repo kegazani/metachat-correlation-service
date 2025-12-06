@@ -1,0 +1,26 @@
+service:
+  name: "correlation-service"
+  log_level: "INFO"
+
+server:
+  http_port: 8004
+  http_host: "0.0.0.0"
+
+database:
+  url: "postgresql+asyncpg://postgres:postgres@127.0.0.1:5432/metachat_correlation"
+  pool_size: 10
+  max_overflow: 20
+
+kafka:
+  brokers: ["127.0.0.1:9092"]
+  consumer_group: "correlation-service"
+  topics:
+    mood_analyzed: "metachat.mood.analyzed"
+    biometric_data_received: "metachat.biometric.data.received"
+    correlation_discovered: "metachat.correlation.discovered"
+
+analysis:
+  min_data_days: 14
+  min_entries: 10
+  min_biometric_coverage: 0.7
+

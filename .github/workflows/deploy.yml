@@ -21,5 +21,3 @@ jobs:
           ssh -o StrictHostKeyChecking=no $SERVICES_USER@$SERVICES_HOST "mkdir -p /opt/metachat-services/correlation-service"
           rsync -az --delete -e "ssh -o StrictHostKeyChecking=no" ./ $SERVICES_USER@$SERVICES_HOST:/opt/metachat-services/correlation-service
           ssh -o StrictHostKeyChecking=no $SERVICES_USER@$SERVICES_HOST "cd /opt/metachat-services/correlation-service && docker build -t metachat/correlation-service:latest . && docker service update --image metachat/correlation-service:latest metachat-services_correlation-service || docker service create --name metachat-services_correlation-service --network metachat_overlay metachat/correlation-service:latest"
-
-
